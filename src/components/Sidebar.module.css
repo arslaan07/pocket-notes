@@ -1,0 +1,104 @@
+.container {
+    /* background-color: aqua; */
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 3px solid blue; */
+    overflow: hidden;
+}
+
+.title {
+    /* border: 2px solid; */
+    height: 15vh;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 35px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background-color: white;
+    align-content: end;
+    text-align: center;
+}
+
+.groupContainer {
+    /* border: 3px solid green; */
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    z-index: 90;
+    /* display: flex;
+    flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    overflow-y: auto;
+    max-height: 85vh;
+    width: 100%;
+    padding-left: 10%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    line-height: 48px;
+}
+.groupContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.groupContainer::-webkit-scrollbar-track {
+    background: #d9d9d9;
+    margin-top: 9vh;
+    padding-top: 40vh;
+
+}
+
+.groupContainer::-webkit-scrollbar-thumb {
+    background: #ffffff;;
+    border-radius: 4px;
+    border: 3px solid #d9d9d9;
+}
+.groupContainer::-webkit-scrollbar-thumb:hover {
+    background: #f8f5f5;
+}
+
+
+.groupCard {
+    font-size: 24px;
+    /* border: 2px solid; */
+    margin-top: 24px;
+    width: 100%;
+    display: flex;
+    gap: 24px;
+    cursor: pointer;
+}
+
+.plus {
+    position: fixed;
+    border-radius: 50%;
+    padding: 18px;
+    background-color: #16008B; 
+    bottom: 5%;
+    left: 19.5%;
+    width: 66px;
+    height: 66px;
+    cursor: pointer;
+}
+
+
+.circle {
+    width: 50px;  /* Adjust size as per your need */
+    height: 50px;
+    background-color: #8f4d4d;  /* Example background color */
+    border-radius: 50%;  /* Makes the div a circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;  /* Centers the initials vertically and horizontally
+    /* position: relative; */
+  }
+  
+  .initials {
+    font-size: 16px;  /* Adjust the font size */
+    font-weight: bold;
+    color: #fff;  /* Example text color */
+  }
