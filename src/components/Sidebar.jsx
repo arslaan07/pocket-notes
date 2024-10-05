@@ -38,7 +38,8 @@ const Sidebar = () => {
                 ))
             }
       </div>
-      <img className={styles.plus} src={plus} alt="" />
+      <img 
+       className={styles.plus} src={plus} alt="" />
     </div>
   )
 }

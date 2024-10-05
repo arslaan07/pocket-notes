@@ -1,0 +1,145 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    /* border: 2px solid; */
+    height: 100%;
+    justify-content: space-between;
+    letter-spacing: 3.5%;
+    padding-left: 50px;
+    padding-right: 30px;
+    padding-top: 30px;
+}
+
+.heading {
+    font-weight: 500;
+    font-size: 29px;
+    
+}
+.nameContainer {
+    /* border: 2px solid; */
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.name {
+    font-weight: 500;
+    font-size: 27px;
+}
+
+.groupName {
+    flex-grow: 1;
+    margin-left: 15px;
+    margin-right: 30px;
+    border-radius: 22px;
+    height: 51px;
+    font-size: 23px;
+    padding-left: 30px;
+    font-weight: 400;
+    border: 2px solid #CCCCCC;
+    outline: none;
+}
+
+.colorContainer {
+    /* border: 2px solid; */
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    display: flex;
+    gap: 80px;
+}
+
+.color {
+    font-weight: 500;
+    font-size: 27px;
+}
+/* AddGroup.module.css */
+
+.list {
+    list-style: none; 
+    display: flex;
+    gap: 16px; 
+  }
+  
+  .list li {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-color: #000; 
+    border-radius: 50%; 
+  }
+  .list li:hover {
+    cursor: pointer;
+  }
+  
+  .list li::before {
+    content: '';
+    display: block;
+    width: 100%; 
+    height: 100%;
+    border-radius: 50%; 
+  }
+  .list .first::before {
+    background-color: rgb(179, 139, 250);
+    transition: box-shadow 0.3s ease;
+  }
+  .list .first:hover::before {
+    background-color: rgb(179, 139, 255);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); 
+  }
+  .list .second::before {
+    background-color: rgb(255, 121, 242);
+    transition: box-shadow 0.3s ease;
+  }
+  .list .second:hover::before {
+    background-color: rgb(255, 121, 255);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); 
+  }
+  .list .third::before {
+    background-color: rgb(67, 230, 252);
+    transition: box-shadow 0.3s ease;
+  }
+  .list .third:hover::before {
+    background-color: rgb(67, 230, 255);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); 
+  }
+  .list .fourth::before {
+    background-color: rgb(241, 149, 118);
+    transition: box-shadow 0.3s ease;
+  }
+  .list .fourth:hover::before {
+    background-color: rgb(241, 149, 125);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); 
+
+  }
+  .list .fifth::before {
+    background-color: rgb(0, 71, 255);
+    transition: box-shadow 0.3s ease;
+  }
+  .list .fifth:hover:before {
+    background-color: rgb(0, 71, 255);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); 
+  }
+  .list .sixth::before {
+    background-color: rgb(102, 145, 255);
+    transition: box-shadow 0.3s ease;
+  }
+  .list .sixth:hover::before {
+    background-color: rgb(102, 145, 255);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); 
+  }
+.button {
+    width: 154px;
+    height: 42px;
+    background-color: #001F8B;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 20px;
+    border-radius: 11px;
+    float: right;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+.button:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); 
+}
