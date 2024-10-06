@@ -25,7 +25,7 @@ const AddGroup = () => {
                 </ul>
                 </div>
             </div>
-            <div>
+            <div className={styles.buttonContainer}>
                 <input type="submit" value="Create" className={styles.button} />
             </div>
             

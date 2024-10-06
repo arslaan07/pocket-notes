@@ -18,3 +18,9 @@
     top: 0;
     z-index: 900;
 }
+@media screen and (max-width: 468px) {
+    .container {
+        width: 80vw;
+        height: 35vh;
+    }
+}
