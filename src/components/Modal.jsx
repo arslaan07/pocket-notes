@@ -1,12 +1,17 @@
 import React from 'react'
 import styles from './Modal.module.css'
-const Modal = ({ children }) => {
+const Modal = ({ children, isOpen, onClose }) => {
   return (
     <>
-    <div className={styles.container}>
-      {children}
-    </div>
-    <div className={styles.background}> </div>
+    {
+       isOpen && 
+       <>
+       <div className={styles.container}>
+         {children}
+       </div>
+       <div onClick={onClose} className={styles.background}> </div>
+       </>
+    }
     </>
   )
 }

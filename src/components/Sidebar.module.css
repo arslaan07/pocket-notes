@@ -78,6 +78,8 @@
 
 .plus {
     position: fixed;
+    z-index: 800; /* position fixed moves the button out of layout
+                    hence it wont be clickable if other elements have a higher z-index */
     border-radius: 50%;
     padding: 18px;
     background-color: #16008B; 
@@ -86,12 +88,19 @@
     width: 66px;
     height: 66px;
     cursor: pointer;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+.plusImg {
+    /* background-color: red; */
+    width: 100%;
+    height: 100%;
 }
 
-
 .circle {
-    width: 50px;  /* Adjust size as per your need */
-    height: 50px;
+    width: 60px;  /* Adjust size as per your need */
+    height: 60px;
     background-color: #8f4d4d;  /* Example background color */
     border-radius: 50%;  /* Makes the div a circle */
     display: flex;
@@ -101,7 +110,7 @@
   }
   
   .initials {
-    font-size: 16px;  /* Adjust the font size */
+    font-size: 23px;  /* Adjust the font size */
     font-weight: bold;
     color: #fff;  /* Example text color */
   }
