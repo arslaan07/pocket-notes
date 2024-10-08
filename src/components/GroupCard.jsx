@@ -10,7 +10,7 @@ const GroupCard = ({ group, onClick }) => {
         }}
         className={styles.circle}
       >
-        <span className={styles.initials}> {getInitials(group.name)} </span>
+        <span className={styles.initials}> {group.initials} </span>
       </div>
       {group.name}
     </div>

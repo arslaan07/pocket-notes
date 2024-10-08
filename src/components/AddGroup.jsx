@@ -3,6 +3,7 @@ import Modal from './Modal'
 import styles from './AddGroup.module.css'
 import Sidebar from './Sidebar'
 import { nanoid } from "nanoid"
+import { getInitials } from '../utils/getInitials'
 
 const colors = ["#B38BFA", "#FF79F2", "#43E6FC", "#F19576", "#0047FF", "#6691FF"]
 const AddGroup = ({ isOpen, onClose, addGroup }) => {
@@ -34,7 +35,7 @@ const AddGroup = ({ isOpen, onClose, addGroup }) => {
     setErrors(errors)
     if(Object.keys(errors).length > 0) return 
     console.log(`form submitted. groupname: ${name}, color: ${selectedBullet.color}}`);
-    addGroup(nanoid(10), name, selectedBullet.color)
+    addGroup(nanoid(10), name, selectedBullet.color, getInitials(name))
     setName('')
     setSelectedBullet({
       index: null,

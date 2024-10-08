@@ -9,10 +9,10 @@ const Layout = ({onOpen, onClose, isOpen, selectedGroup, setSelectedGroup}) => {
   const windowWidth = useWindowWidth()
   const showSidebar = !(location.pathname === `/group/id=${selectedGroup}` && windowWidth <= 468)
   const [notesGroup, setNotesGroup] = useState([])
-  const addGroup = (id, name, color) => {
+  const addGroup = (id, name, color, initials) => {
     setNotesGroup((prevGroups) => [
       ...prevGroups,
-      {id, name, color}
+      {id, name, color, initials}
     ])
   }
   return (
