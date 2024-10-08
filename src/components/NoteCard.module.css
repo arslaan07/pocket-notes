@@ -17,3 +17,17 @@
     gap: 5px;
     justify-content: end;
 }
+.dateStyle {
+    margin-right: 30px;
+}
+@media screen and (max-width: 468px) {
+    .noteCard{
+        font-size: 14px;
+    }
+    .date {
+        gap: 2px;
+    }
+    .dateStyle {
+        margin-right: 24px;
+    }
+}

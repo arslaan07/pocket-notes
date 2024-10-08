@@ -7,10 +7,12 @@ import useWindowWidth from '../hooks/useWindowWidth'
 import { formatDateAndTime } from '../utils/formatDateAndTime'
 import NoteCard from './NoteCard'
 import { nanoid } from 'nanoid'
- 
+import GroupCard from './GroupCard'
+import { useNavigate } from 'react-router-dom'
+
 const ContentArea = ({selectedGroup, setSelectedGroup}) => {
-  console.log(selectedGroup)
   const windowWidth = useWindowWidth()
+  const navigate = useNavigate()
   const showBackImg = windowWidth <= 468
   const [formData, setFormData] = useState({
     nId: '',
@@ -19,17 +21,20 @@ const ContentArea = ({selectedGroup, setSelectedGroup}) => {
     date: '',
     time: ''
   })
-  const  {date, time } = formatDateAndTime()
+  const { date, time } = formatDateAndTime()
   const [allNotes, setAllNotes] = useState([])
+  const [presentGroup, setPresentGroup] = useState(null)  // Use useState for presentGroup
+
   const handleChange = (e) => {
     setFormData({
       note: e.target.value
     })
   }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    if(formData.note.trim() === '') return 
-    console.log("note submitted: ", formData)
+    if (formData.note.trim() === '') return
+
     const newNote = {
       nId: nanoid(10),
       gId: selectedGroup,
@@ -37,11 +42,10 @@ const ContentArea = ({selectedGroup, setSelectedGroup}) => {
       date,
       time
     }
-    setAllNotes((prevNotes) => ([
+    setAllNotes((prevNotes) => [
       ...prevNotes,
       newNote
-    ]))
-    console.log(allNotes)
+    ])
     setFormData({
       nId: '',
       gId: '',
@@ -49,54 +53,75 @@ const ContentArea = ({selectedGroup, setSelectedGroup}) => {
       date: '',
       time: ''
     })
-    
-      }
+  }
+
   const handleKeyDown = (e) => {
-    if(e.key === 'Enter') {
+    if (e.key === 'Enter') {
       handleSubmit(e)
     }
   }
+
   useEffect(() => {
-    let storedNotes = JSON.parse(localStorage.getItem('allNotes')) || []
-    if(storedNotes) {
-      setAllNotes(storedNotes)
-    }
-    let storedSelectedGroup = JSON.parse(localStorage.getItem('selectedGroup')) || ''
-    if(storedSelectedGroup) {
-      setSelectedGroup(storedSelectedGroup)
-    }
+    const storedNotes = JSON.parse(localStorage.getItem('allNotes')) || []
+    setAllNotes(storedNotes)
+
+    const storedSelectedGroup = JSON.parse(localStorage.getItem('selectedGroup')) || ''
+    setSelectedGroup(storedSelectedGroup)
   }, [])
+
   useEffect(() => {
-    if(allNotes.length > 0) {
+    if (allNotes.length > 0) {
       localStorage.setItem('allNotes', JSON.stringify(allNotes))
     }
   }, [allNotes])
+
   useEffect(() => {
-    if(selectedGroup) {
+    if (selectedGroup) {
       localStorage.setItem('selectedGroup', JSON.stringify(selectedGroup))
     }
+
+    const storedGroups = JSON.parse(localStorage.getItem('notesGroup')) || []
+    const group = storedGroups.find((group) => group.id === selectedGroup)
+    if (group) {
+      setPresentGroup(group)  // Update presentGroup using setPresentGroup
+    }
   }, [selectedGroup])
+
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>
-        {showBackImg && <img className={styles.backImg} src={backImg} alt="" />}
-        My Notes</h1>
+        <button className={styles.backImg} onClick={() => {
+          localStorage.removeItem('selectedGroup')
+          setSelectedGroup('')
+          navigate("/")
+        }}>
+          {showBackImg && <img src={backImg} alt="" />}
+        </button>
+        <div className={styles.groupContainer}>
+          {presentGroup && (
+            <GroupCard group={presentGroup} onClick={() => setSelectedGroup(presentGroup.id)} heading />
+          )}
+        </div>
+      </h1>
       <div className={styles.notesContainer}>
-        {
-          allNotes.filter((note) => note.gId === selectedGroup)
+        {allNotes
+          .filter((note) => note.gId === selectedGroup)
           .map((note) => (
-            <NoteCard note={note} key={note.nId}/>
-          ))
-        }
+            <NoteCard note={note} key={note.nId} />
+          ))}
       </div>
       <div>
         <form action="" className={styles.textareaContainer} onSubmit={handleSubmit}>
-          <textarea onChange={handleChange}  onKeyDown={handleKeyDown}
-           className={styles.textarea} name="" id=""
-          value={formData.note}
-          placeholder='Enter your text here...........'></textarea>
-          <button className={styles.saveButton} type='submit'> 
-            <img src={formData.note? saveEnable : saveDisable} alt="" /> </button>
+          <textarea
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+            className={styles.textarea}
+            value={formData.note}
+            placeholder="Enter your text here..........."
+          ></textarea>
+          <button className={styles.saveButton} type="submit">
+            <img src={formData.note ? saveEnable : saveDisable} alt="" />
+          </button>
         </form>
       </div>
     </div>

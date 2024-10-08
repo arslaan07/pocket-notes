@@ -5,7 +5,7 @@ const NoteCard = ({ note }) => {
     <div className={styles.noteCard} key={note.nId}>
       {note.note}
       <div className={styles.date}>
-        <div style={{ marginRight: "30px" }}> {note.date} </div>
+        <div className={styles.dateStyle}> {note.date} </div>
         <ul>
           <li> {note.time}</li>
         </ul>
