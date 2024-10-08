@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Modal from './Modal'
 import styles from './AddGroup.module.css'
 import Sidebar from './Sidebar'
-import { v4 as uuidv4 } from "uuid"
+import { nanoid } from "nanoid"
 
 const colors = ["#B38BFA", "#FF79F2", "#43E6FC", "#F19576", "#0047FF", "#6691FF"]
 const AddGroup = ({ isOpen, onClose, addGroup }) => {
@@ -34,7 +34,7 @@ const AddGroup = ({ isOpen, onClose, addGroup }) => {
     setErrors(errors)
     if(Object.keys(errors).length > 0) return 
     console.log(`form submitted. groupname: ${name}, color: ${selectedBullet.color}}`);
-    addGroup(uuidv4(), name, selectedBullet.color)
+    addGroup(nanoid(10), name, selectedBullet.color)
     setName('')
     setSelectedBullet({
       index: null,

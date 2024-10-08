@@ -1,0 +1,25 @@
+.groupCard {
+    font-size: 24px;
+    /* border: 2px solid; */
+    margin-top: 24px;
+    width: 100%;
+    display: flex;
+    gap: 24px;
+    cursor: pointer;
+}
+.circle {
+    width: 60px;  /* Adjust size as per your need */
+    height: 60px;
+    background-color: #8f4d4d;  /* Example background color */
+    border-radius: 50%;  /* Makes the div a circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;  /* Centers the initials vertically and horizontally
+    /* position: relative; */
+  }
+  
+  .initials {
+    font-size: 23px;  /* Adjust the font size */
+    font-weight: bold;
+    color: #fff;  /* Example text color */
+  }

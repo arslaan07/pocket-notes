@@ -1,54 +1,54 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './ContentArea.module.css'
 import saveDisable from '../images/saveDisable.png'
 import saveEnable from '../images/saveEnable.png'
 import backImg from '../images/back.png'
 import useWindowWidth from '../hooks/useWindowWidth'
-
-const notes = ["Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut, recusandae. Saepe incidunt fugiat quisquam assumenda cumque ipsam voluptate nulla ut",
-  "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut, recusandae. Saepe incidunt fugiat quisquam assumenda cumque ipsam voluptate nulla ut!",
-  "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut, recusandae. Saepe incidunt fugiat quisquam assumenda cumque ipsam voluptate nulla ut!",
-  "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut, recusandae. Saepe incidunt fugiat quisquam assumenda cumque ipsam voluptate nulla ut!",
-  "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut, recusandae. Saepe incidunt fugiat quisquam assumenda cumque ipsam voluptate nulla ut!"
-
-]
-    let date = new Date()
-    let splitDate = date.toString().split(' ')
-    let formattedDate = splitDate[2][0] === '0' ? splitDate[2][1] : splitDate[2]
-    formattedDate += " " + splitDate[1] + " " + splitDate[3]
-    let time = new Date();
-    let formattedTime =  time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-const ContentArea = () => {
+import { formatDateAndTime } from '../utils/formatDateAndTime'
+import NoteCard from './NoteCard'
+import { nanoid } from 'nanoid'
+ 
+const ContentArea = ({selectedGroup, setSelectedGroup}) => {
+  console.log(selectedGroup)
   const windowWidth = useWindowWidth()
   const showBackImg = windowWidth <= 468
   const [formData, setFormData] = useState({
+    nId: '',
+    gId: '',
     note: '',
     date: '',
     time: ''
   })
+  const  {date, time } = formatDateAndTime()
   const [allNotes, setAllNotes] = useState([])
   const handleChange = (e) => {
     setFormData({
-      note: e.target.value,
-      date: formattedDate,
-      time: formattedTime
+      note: e.target.value
     })
   }
   const handleSubmit = (e) => {
     e.preventDefault()
     if(formData.note.trim() === '') return 
     console.log("note submitted: ", formData)
+    const newNote = {
+      nId: nanoid(10),
+      gId: selectedGroup,
+      note: formData.note,
+      date,
+      time
+    }
     setAllNotes((prevNotes) => ([
       ...prevNotes,
-      formData
+      newNote
     ]))
     console.log(allNotes)
     setFormData({
+      nId: '',
+      gId: '',
       note: '',
       date: '',
       time: ''
     })
-    console.log(allNotes)
     
       }
   const handleKeyDown = (e) => {
@@ -56,7 +56,26 @@ const ContentArea = () => {
       handleSubmit(e)
     }
   }
-    
+  useEffect(() => {
+    let storedNotes = JSON.parse(localStorage.getItem('allNotes')) || []
+    if(storedNotes) {
+      setAllNotes(storedNotes)
+    }
+    let storedSelectedGroup = JSON.parse(localStorage.getItem('selectedGroup')) || ''
+    if(storedSelectedGroup) {
+      setSelectedGroup(storedSelectedGroup)
+    }
+  }, [])
+  useEffect(() => {
+    if(allNotes.length > 0) {
+      localStorage.setItem('allNotes', JSON.stringify(allNotes))
+    }
+  }, [allNotes])
+  useEffect(() => {
+    if(selectedGroup) {
+      localStorage.setItem('selectedGroup', JSON.stringify(selectedGroup))
+    }
+  }, [selectedGroup])
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>
@@ -64,14 +83,9 @@ const ContentArea = () => {
         My Notes</h1>
       <div className={styles.notesContainer}>
         {
-          allNotes.map((note, i) => (
-            <div className={styles.noteCard} key={i}>
-              {note.note}
-              <div className={styles.date}>
-                <div style={{marginRight: '30px'}}> {note.date} </div>
-                <ul><li> {note.time}</li></ul>                
-              </div>
-            </div>
+          allNotes.filter((note) => note.gId === selectedGroup)
+          .map((note) => (
+            <NoteCard note={note} key={note.nId}/>
           ))
         }
       </div>

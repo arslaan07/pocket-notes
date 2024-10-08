@@ -1,0 +1,19 @@
+.noteCard {
+    height: max-content;
+    width: 94%;
+    border-radius: 5px;
+    background-color: #ffffff;
+    padding: 25px 20px 10px 20px;
+    font-weight: 400;
+    box-shadow: 0 4px 20px #00000040;
+    flex-grow: 1;
+}
+.date {
+    /* float: right; */
+    margin-top: 24px;
+    font-weight: 500;
+    color: #353535;
+    display: flex;
+    gap: 5px;
+    justify-content: end;
+}
