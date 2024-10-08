@@ -171,7 +171,7 @@
   
 }
 .nameContainer {
-  gap: 12px;
+  gap: 6px;
 }
 .name {
   font-weight: 500;
@@ -191,7 +191,10 @@
 }
 .colorContainer {
   /* border: 2px solid; */
-  gap: 25px;
+  gap: 6px;
+  /* background-color: red; */
+  display: flex;
+  justify-content: space-between;
 }
 .color {
   font-weight: 500;
@@ -200,6 +203,7 @@
 }
 .list {
   gap: 8px; 
+  padding-right: 10px;
 }
 
 .list li {
