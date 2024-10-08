@@ -10,10 +10,10 @@ const GroupCard = ({ group, onClick, heading, selectedGroup }) => {
         heading? styles.bigContentGroupCard : styles.groupCard } onClick={onClick}
         style={{
             backgroundColor: !heading 
-              ? isSelected ? "#DDDDDD" : "white"
+              ? isSelected ? "#DAE5F5" : "white"
               : "transparent",
               borderTopLeftRadius: "15px",
-              borderBottomLeftRadius: "15px",
+              borderBottomLeftRadius: "15px"
           }}
           >
       <div
