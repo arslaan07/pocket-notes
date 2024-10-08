@@ -28,7 +28,9 @@ const Sidebar = ({ onOpen, notesGroup, setNotesGroup, selectedGroup, setSelected
       <div className={styles.groupContainer}>
             {
                notesGroup.length > 0 && notesGroup.map((group) => (
-                    <GroupCard key={group.id} group={group} onClick={() => {setSelectedGroup(group.id)}}/>
+                    <GroupCard key={group.id} group={group}
+                     onClick={() => {setSelectedGroup(group.id)}}
+                     selectedGroup={selectedGroup}/>
                 ))
             }
       </div>

@@ -2,11 +2,20 @@ import React from "react";
 import { getInitials } from "../utils/getInitials";
 import styles from "./GroupCard.module.css";
 import useWindowWidth from "../hooks/useWindowWidth";
-const GroupCard = ({ group, onClick, heading }) => {
+const GroupCard = ({ group, onClick, heading, selectedGroup }) => {
     const windowWidth = useWindowWidth()
+    const isSelected = group.id === selectedGroup
   return (
     <div key={group.id} className={heading && windowWidth <= 468? styles.contentGroupCard :
-        heading? styles.bigContentGroupCard : styles.groupCard } onClick={onClick}>
+        heading? styles.bigContentGroupCard : styles.groupCard } onClick={onClick}
+        style={{
+            backgroundColor: !heading 
+              ? isSelected ? "#DDDDDD" : "white"
+              : "transparent",
+              borderTopLeftRadius: "15px",
+              borderBottomLeftRadius: "15px",
+          }}
+          >
       <div
         style={{
           background: group.color,
