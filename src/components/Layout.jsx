@@ -11,8 +11,17 @@ const Layout = ({onOpen, onClose, isOpen, selectedGroup, setSelectedGroup}) => {
   const [notesGroup, setNotesGroup] = useState([])
   const groupContainerRef = useRef()
   const [addGrp, setAddGrp] = useState(false)
-  console.log(addGrp)
+
+  const setOfNames = new Set()
+    for(let i of notesGroup) {
+      setOfNames.add(i.name)
+    }
+    console.log(setOfNames)
   const addGroup = (id, name, color, initials) => {
+    if(setOfNames.has(name)) {
+      return 'Group Name already exists'
+    } 
+    onClose()
     setAddGrp(true)
     setNotesGroup((prevGroups) => [
       ...prevGroups,
@@ -20,6 +29,7 @@ const Layout = ({onOpen, onClose, isOpen, selectedGroup, setSelectedGroup}) => {
     ])
     // open notes page for the created group
     setSelectedGroup(id)
+    return ''
   }
 
   // move the scrollbar to the newly added group

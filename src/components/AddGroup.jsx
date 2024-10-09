@@ -7,6 +7,8 @@ import { getInitials } from '../utils/getInitials'
 
 const colors = ["#B38BFA", "#FF79F2", "#43E6FC", "#F19576", "#0047FF", "#6691FF"]
 const AddGroup = ({ isOpen, onClose, addGroup }) => {
+  const [nameError, setNameError] = useState('')
+
   const [selectedBullet, setSelectedBullet] = useState({
     index: null,
     color: ""
@@ -23,6 +25,7 @@ const AddGroup = ({ isOpen, onClose, addGroup }) => {
   const handleClick = (e) => {
     setName(e.target.value)
   }
+  let errorName = ''
   const handleSubmit = (e) => {
     e.preventDefault()
     let errors = {}
@@ -35,13 +38,14 @@ const AddGroup = ({ isOpen, onClose, addGroup }) => {
     setErrors(errors)
     if(Object.keys(errors).length > 0) return 
     console.log(`form submitted. groupname: ${name}, color: ${selectedBullet.color}}`);
-    addGroup(nanoid(10), name, selectedBullet.color, getInitials(name))
+    errorName = addGroup(nanoid(10), name, selectedBullet.color, getInitials(name))
+    setNameError(errorName)
     setName('')
     setSelectedBullet({
       index: null,
       color: ""
     })
-    onClose()
+    // onClose()
   }
   return (
     <div>
@@ -79,6 +83,7 @@ const AddGroup = ({ isOpen, onClose, addGroup }) => {
             </div>
             <span className={styles.error}>{errors.color}</span>
             <div className={styles.buttonContainer}>
+              <span className={styles.errorName}>{nameError}</span>
                 <button type="submit" className={styles.button} > Create </button>
             </div>
             
