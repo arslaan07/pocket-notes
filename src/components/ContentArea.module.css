@@ -41,7 +41,7 @@
     border-radius: 9px;
     outline: none;
     font-weight: 400;
-    font-size: 30px;
+    font-size: 29px;
     padding: 20px 30px;
     letter-spacing: 1px;
 }
@@ -66,6 +66,10 @@
     cursor: pointer;
     background-color: transparent;
     border: none;
+    transition: transform 0.3s ease;
+}
+.saveButton:hover {
+    transform: scale(1.1); /* Scale up the button */
 }
 .notesContainer {
     display: flex;

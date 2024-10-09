@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './Sidebar.module.css'
 import plus from '../images/plus.png'
 import AddGroup from './AddGroup'
 import GroupCard from './GroupCard'
 
-const Sidebar = ({ onOpen, notesGroup, setNotesGroup, selectedGroup, setSelectedGroup }) => {
+const Sidebar = React.forwardRef(({ onOpen, notesGroup, setNotesGroup, selectedGroup, setSelectedGroup}, ref ) => {
   console.log(selectedGroup)
   useEffect(() => {
     const group = JSON.parse(localStorage.getItem('notesGroup')) || []
@@ -14,6 +14,7 @@ const Sidebar = ({ onOpen, notesGroup, setNotesGroup, selectedGroup, setSelected
     if(notesGroup.length > 0) {
       localStorage.setItem('notesGroup', JSON.stringify(notesGroup))
     }
+
   }, [notesGroup])
   useEffect(() => {
     let storedSelectedGroup = JSON.parse(localStorage.getItem('selectedGroup')) || ''
@@ -25,7 +26,7 @@ const Sidebar = ({ onOpen, notesGroup, setNotesGroup, selectedGroup, setSelected
     <>
     <div className={styles.container}>
       <div className={styles.title}>Pocket Notes</div>
-      <div className={styles.groupContainer}>
+      <div className={styles.groupContainer} ref={ref}>
             {
                notesGroup.length > 0 && notesGroup.map((group) => (
                     <GroupCard key={group.id} group={group}
@@ -43,6 +44,6 @@ const Sidebar = ({ onOpen, notesGroup, setNotesGroup, selectedGroup, setSelected
     {/* <AddGroup isOpen={isOpen} /> */}
     </>
   )
-}
+})
 
 export default Sidebar

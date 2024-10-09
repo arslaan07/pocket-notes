@@ -1,13 +1,18 @@
 .groupCard {
-    font-size: 24px;
-    /* border: 2px solid; */
-    margin-top: 10px;
-    width: 100%;
-    display: flex;
-    gap: 24px;
-    cursor: pointer;
-    align-items: center;
-    padding: 14px;
+  font-size: 24px;
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  gap: 24px;
+  cursor: pointer;
+  align-items: center;
+  padding: 14px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.groupCard:hover {
+  transform: scale(1.05); /* Increases size slightly */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow to make it look like it's coming forward */
 }
 .bigContentGroupCard {
     font-size: 24px;

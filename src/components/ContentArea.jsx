@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './ContentArea.module.css'
 import saveDisable from '../images/saveDisable.png'
 import saveEnable from '../images/saveEnable.png'
@@ -11,6 +11,7 @@ import GroupCard from './GroupCard'
 import { useNavigate } from 'react-router-dom'
 
 const ContentArea = ({selectedGroup, setSelectedGroup}) => {
+  const notesContainerRef = useRef(null)
   const windowWidth = useWindowWidth()
   const navigate = useNavigate()
   const showBackImg = windowWidth <= 468
@@ -73,6 +74,10 @@ const ContentArea = ({selectedGroup, setSelectedGroup}) => {
     if (allNotes.length > 0) {
       localStorage.setItem('allNotes', JSON.stringify(allNotes))
     }
+    // move scroll to bottom on adding a note
+    if (notesContainerRef.current) {
+      notesContainerRef.current.scrollTop = notesContainerRef.current.scrollHeight;
+    }
   }, [allNotes])
 
   useEffect(() => {
@@ -103,7 +108,7 @@ const ContentArea = ({selectedGroup, setSelectedGroup}) => {
           )}
         </div>
       </h1>
-      <div className={styles.notesContainer}>
+      <div className={styles.notesContainer} ref={notesContainerRef}>
         {allNotes
           .filter((note) => note.gId === selectedGroup)
           .map((note) => (

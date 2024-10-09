@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Sidebar from './Sidebar'
 import { Outlet, useLocation } from 'react-router-dom'
 import styles from './Layout.module.css'
@@ -9,16 +9,32 @@ const Layout = ({onOpen, onClose, isOpen, selectedGroup, setSelectedGroup}) => {
   const windowWidth = useWindowWidth()
   const showSidebar = !(location.pathname === `/group/id=${selectedGroup}` && windowWidth <= 468)
   const [notesGroup, setNotesGroup] = useState([])
+  const groupContainerRef = useRef()
+  const [addGrp, setAddGrp] = useState(false)
+  console.log(addGrp)
   const addGroup = (id, name, color, initials) => {
+    setAddGrp(true)
     setNotesGroup((prevGroups) => [
       ...prevGroups,
       {id, name, color, initials}
     ])
+    // open notes page for the created group
+    setSelectedGroup(id)
   }
+
+  // move the scrollbar to the newly added group
+  useEffect(() => {
+    if(addGrp) {
+      if(groupContainerRef.current) {
+        groupContainerRef.current.scrollTop = groupContainerRef.current.scrollHeight
+      }
+    }
+  }, [addGrp])
+ 
   return (
     <>
     <div className={styles.container}>
-      {showSidebar && <Sidebar onOpen={onOpen} isOpen={isOpen} 
+      {showSidebar && <Sidebar onOpen={onOpen} isOpen={isOpen} ref={groupContainerRef}
       notesGroup={notesGroup} setNotesGroup={setNotesGroup} 
       selectedGroup={selectedGroup} setSelectedGroup={setSelectedGroup}/>}
       <main className={styles.main}>

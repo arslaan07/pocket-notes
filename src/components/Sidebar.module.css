@@ -1,6 +1,7 @@
 .container {
     /* background-color: aqua; */
     min-width: 25%;
+    max-width: 25%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,6 +42,9 @@
     padding-top: 10%;
     padding-bottom: 10%;
     line-height: 48px;
+
+    overflow-x: hidden;
+
 }
 .groupContainer::-webkit-scrollbar {
     width: 10px;
@@ -84,6 +88,11 @@
     justify-items: center;
     align-items: center;
     border: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.plus:hover {
+    transform: scale(1.1); /* Grows the button slightly on hover */
+    background-color: #0D0071; /* Changes the background color on hover */
 }
 .plusImg {
     /* background-color: red; */
@@ -96,6 +105,8 @@
   @media screen and (max-width: 468px) {
     .container {
         width: 100%;
+        min-width: none;
+        max-width: none;
         
     }
     .title {
