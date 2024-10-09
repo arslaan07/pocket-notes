@@ -244,7 +244,8 @@
 .errorName {
   height: 14px;
   color: red;
-  line-height: 10px;
+  line-height: 16px;
   font-size: 12px;
+  margin-top: -16px;
 }
 }
