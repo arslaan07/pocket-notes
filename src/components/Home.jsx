@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Home.module.css'
-import homeImg from '../images/home.png'
-import lockImg from '../images/lock.png'
+import homeImg from '../assets/images/home.png'
+import lockImg from '../assets/images/lock.png'
 const Home = () => {
   return (
     <div className={styles.container}>

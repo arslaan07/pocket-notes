@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './Sidebar.module.css'
-import plus from '../images/plus.png'
+import plus from '../assets/images/plus.png'
 import AddGroup from './AddGroup'
 import GroupCard from './GroupCard'
 
